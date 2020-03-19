@@ -1,0 +1,51 @@
+{
+    "configurations": [
+        {
+            "name": "Windows Debug",
+            "includePath": [
+                "${env:VSARM}/arm-gcc/arm-none-eabi/include/c++/9.2.1",
+                "${env:VSARM}/arm-gcc/arm-none-eabi/include/c++/9.2.1/arm-none-eabi",
+                "${env:VSARM}/arm-gcc/arm-none-eabi/include/c++/9.2.1/backward",
+                "${env:VSARM}/arm-gcc/lib/gcc/arm-none-eabi/9.2.1/include",
+                "${env:VSARM}/arm-gcc/lib/gcc/arm-none-eabi/9.2.1/include-fixed",
+                "${env:VSARM}/arm-gcc/arm-none-eabi/include",
+                "${workspaceRoot}/Drivers/CMSIS/Include/",
+                "${workspaceRoot}/Drivers/CMSIS/Device/ST/STM32F0xx/Include/",
+                "${workspaceRoot}/Core/Inc",
+                "${workspaceRoot}/Core/Src",
+                "${workspaceRoot}/Drivers/STM32F0xx_StdPeriph_Driver/Inc",
+                "${workspaceRoot}/Drivers/STM32F0xx_StdPeriph_Driver/Src"
+            ],
+            "defines": [
+                "DEBUG",
+                "DEFAULT_STACK_SIZE=2048",
+                "USE_DEVICE_MODE",
+                "USE_FULL_ASSERT",
+                "HSI_VALUE=8000000",
+                "LSI_VALUE=32000",
+                "PREFETCH_ENABLE=1",
+                "INSTRUCTION_CACHE_ENABLE=1",
+                "DATA_CACHE_ENABLE=1",
+                "STM32F030x8",
+                "__CC_ARM",
+                "__INT8_TYPE__=char",
+                "__UINT8_TYPE__=unsigned char",
+                "__INT16_TYPE__=short int",
+                "__UINT16_TYPE__=short unsigned int"
+            ],
+            "intelliSenseMode": "clang-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "browse": {
+                "path": [
+                    "${workspaceRoot}",
+                    "${env:VSARM}/arm-gcc",
+                    "${env:VSARM}/cache"
+                ],
+                "limitSymbolsToIncludedHeaders": false,
+                "databaseFilename": ""
+            }
+        }
+    ],
+    "version": 4
+}

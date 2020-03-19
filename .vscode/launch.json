@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+            "serverpath": "openocd",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/vsarm_firmware.elf",
+            "name": "Debug (OpenOCD)",
+            "device": "STM32F030x8",
+            "v1": false,
+            "svdFile": "${workspaceRoot}/STM32F030.svd",
+            "armToolchainPath": "${env:VSARM}/arm-gcc/bin",
+            "configFiles": [
+                "${env:SHARE}/openocd/scripts/board/stm32f0x.cfg"
+            ]
+        },
+        {
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "stutil",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/vsarm_firmware.elf",
+            "name": "Debug (ST-Util)",
+            "device": "STM32F030x8",
+            "v1": false,
+            "svdFile": "${workspaceRoot}/STM32F030.svd",
+            "armToolchainPath": "${env:VSARM}/arm-gcc/bin"
+        }
+    ]
+}
