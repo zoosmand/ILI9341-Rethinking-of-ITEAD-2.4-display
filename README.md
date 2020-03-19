@@ -1,0 +1,2 @@
+# ILI9341-Rethinking-of-ITEAD-2.4-display
+ ITEAD 2.4 ILI9341 LCD on STM32F030C8
