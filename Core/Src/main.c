@@ -131,6 +131,7 @@ static void CronSeconds_Handler(void) {
 // ---- Minutes ---- //
 static void CronMinutes_Handler(void) {
   //
+  printf("A minute left.\n");
 }
 
 
