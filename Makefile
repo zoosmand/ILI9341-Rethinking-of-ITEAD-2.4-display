@@ -35,10 +35,13 @@ BUILD_DIR = build
 # C sources
 C_SOURCES =  \
 Core/Src/main.c \
+Core/Src/tim.c \
 Core/Src/common.c \
 Core/Src/usart.c \
 Core/Src/ili9341.c \
 Core/Src/display.c \
+Core/Src/spi.c \
+Core/Src/w25qxx.c \
 Core/Src/dot_5x7.c \
 Core/Src/dot_10x14.c \
 Core/Src/dot_15x21.c \

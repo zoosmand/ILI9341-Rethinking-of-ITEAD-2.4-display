@@ -26,10 +26,13 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 #include "common.h"
+#include "tim.h"
 #include "usart.h"
 #include "ili9341.h"
 #include "fonts.h"
 #include "display.h"
+#include "spi.h"
+#include "w25qxx.h"
 #include "stm32f0xx_it.h"
 
 /* Exported types ------------------------------------------------------------*/
@@ -44,6 +47,7 @@ extern uint32_t minutes;
 extern uint32_t _EREG_;
 extern uint32_t check;
 extern uint32_t SystemCoreClock;
+extern uint8_t eepromReady;
 
 /* Private defines -----------------------------------------------------------*/
 #define SWO_USART
@@ -56,11 +60,12 @@ extern uint32_t SystemCoreClock;
 #define _RDF_     4 // Run Display Flag
 // #define _DDF_     5 // Display Delay Flag
 // #define _DBLF_    6 // Data Buffer is Locked Flag
-// #define _U1RXF_   7 // USART1 RXNE Interrupt occurs Flag
+#define _U1RXF_   7 // USART1 RXNE Interrupt occurs Flag
 // #define _BLINKF_  8 // Blink Flaf
 #define _DELAYF_  9 // Delay Flag
 // #define _EWUPF_   10 // EXTI WakeUp PA0 Flag
 // #define _ETSF_    11 // EXTI Touch Screen PA15 Flag
+#define _TBLF_    12 // Transfer Buffer is Locked Flag
 
 /* Exported functions prototypes ---------------------------------------------*/
 extern void Delay_Handler(uint32_t delay);

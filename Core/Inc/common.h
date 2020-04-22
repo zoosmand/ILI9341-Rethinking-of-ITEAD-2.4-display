@@ -73,11 +73,13 @@ struct __FILE {
 #define GPIO_PIN_ALL                (uint16_t)0xffff /*!< Select all pins */
 
 #define _IN                         0b00  // Input mode
-#define _PU                         0b01  // General purpose output mode
+#define _OUT                        0b01  // General purpose output mode
 #define _AF                         0b10  // Alternate mode
 #define _AN                         0b10  // Analog mode
 #define _PP                         0b0   // Push-pull output
 #define _OD                         0b1   // Open-drain output
+#define _PD                         0b10  // Push-Down
+#define _PU                         0b01  // Push-Up
 #define _LS                         0b00  // Low speed
 #define _MS                         0b01  // Medium speed
 #define _HS                         0b11  // High speed

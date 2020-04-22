@@ -86,7 +86,6 @@ __STATIC_INLINE void _putc(uint8_t ch) {
   * @retval length of the array 
   */
 int _write(int32_t file, char *ptr, int32_t len) {
-  // static uint32_t check = 0;
   for(int32_t i = 0 ; i < len ; i++) {
     _putc(*ptr++);  
   }

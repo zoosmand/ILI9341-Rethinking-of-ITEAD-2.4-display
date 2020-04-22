@@ -74,3 +74,19 @@ void SysTick_Handler(void) {
 /* please refer to the startup file (startup_stm32f0xx.s).                    */
 /******************************************************************************/
 
+/**
+  * @brief This function handles TIM6 global interrupt.
+  */
+void TIM6_IRQHandler(void) {
+  CLEAR_BIT(TIM6->SR, TIM_SR_UIF);
+  FLAG_SET(_EREG_, _BT6F_);
+}
+
+
+/**
+  * @brief This function handles USART1 global interrupt.
+  */
+void USART1_IRQHandler(void) {
+  SET_BIT(USART1->RQR, USART_RQR_RXFRQ);
+  FLAG_SET(_EREG_, _U1RXF_);
+}

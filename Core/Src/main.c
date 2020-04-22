@@ -20,6 +20,7 @@ uint32_t _EREG_           = 0;
 uint32_t delay_tmp        = 0;
 uint32_t check            = 0;
 uint32_t SystemCoreClock  = 16000000;
+uint8_t eepromReady = 0;
 
 /* Private variables ---------------------------------------------------------*/
 static uint32_t millis_tmp    = 100;
@@ -50,9 +51,14 @@ static void IWDG_Init(void);
   */
 int main(void) {
   Delay(500);
-  USART1_Init();
-  ILI9341_Init();
   IWDG_Init();
+  USART1_Init();
+  TIM6_Init();
+  ILI9341_Init();
+  SPI1_Init();
+  if (W25qxx_Init()) {
+    eepromReady = 1;
+  }
 
   while (1) {
     Delay_Handler(0);
@@ -124,8 +130,8 @@ static void CronMillis_Handler(void) {
 static void CronSeconds_Handler(void) {
   /* Reload IWDG counter */
   IWDG->KR = IWDG_KEY_RELOAD;
-  /* Set Run Display flag, i.e. Display_Handler() */
-  FLAG_SET(_EREG_, _RDF_);
+  // /* Set Run Display flag, i.e. Display_Handler() */
+  // FLAG_SET(_EREG_, _RDF_);
 }
 
 // ---- Minutes ---- //
@@ -144,12 +150,17 @@ static void CronMinutes_Handler(void) {
 /********************************************************************************/
 void Flags_Handler(void){
   if (FLAG_CHECK(_EREG_, _BT6F_)) {
-    // BasicTimer_FromIT_Handler(TIM6);
+    BasicTimer_Handler(TIM6);
     FLAG_CLR(_EREG_, _BT6F_);
   }
 
+  if (FLAG_CHECK(_EREG_, _U1RXF_)) {
+    USART1_RX_Handler();
+    FLAG_CLR(_EREG_, _U1RXF_);
+  }
+
   if (FLAG_CHECK(_EREG_, _RDF_)) {
-    Display_Handler(ILI1394);
+    Display_Handler();
     FLAG_CLR(_EREG_, _RDF_);
   }
 }
@@ -254,16 +265,23 @@ void SystemInit (void) {
   /*                          Set peripheral clocks                             */
   /*----------------------------------------------------------------------------*/
   /* AHB peripherals */
-  SET_BIT(RCC->AHBENR, 
+  SET_BIT(RCC->AHBENR, (
       RCC_AHBENR_GPIOAEN
     | RCC_AHBENR_GPIOBEN
     | RCC_AHBENR_GPIOFEN
-  );
+    | RCC_AHBENR_DMAEN
+  ));
 
   /* APB1 peripherals */
+  SET_BIT(RCC->APB1ENR, (
+    RCC_APB1ENR_TIM6EN
+  ));
 
   /* APB2 peripherals */
-  SET_BIT(RCC->APB2ENR, RCC_APB2ENR_USART1EN);
+  SET_BIT(RCC->APB2ENR, (
+      RCC_APB2ENR_USART1EN
+    | RCC_APB2ENR_SPI1EN
+  ));
 }
 
 

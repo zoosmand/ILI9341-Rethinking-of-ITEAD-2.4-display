@@ -21,13 +21,13 @@ void ILI9341_Init(void) {
   /* Enable GPIO Oupput on hight speed */
   // RS, RD, WR, Backlight
   GPIOA->MODER |= (
-      (_PU << (BL_Pos * 2U))
-    | (_PU << (RS_Pos * 2U))
-    | (_PU << (RD_Pos * 2U))
-    | (_PU << (WR_Pos * 2U))
+      (_OUT << (BL_Pos * 2U))
+    | (_OUT << (RS_Pos * 2U))
+    | (_OUT << (RD_Pos * 2U))
+    | (_OUT << (WR_Pos * 2U))
   );
   GPIOA->OSPEEDR |= (
-      (_PU << (BL_Pos * 2U))
+      (_OUT << (BL_Pos * 2U))
     | (_HS << (RS_Pos * 2U))
     | (_HS << (RD_Pos * 2U))
     | (_HS << (WR_Pos * 2U))
@@ -35,11 +35,11 @@ void ILI9341_Init(void) {
 
   // CS, Reset
   GPIOF->MODER |= (
-      (_PU << (RST_Pos * 2U))
-    | (_PU << (CS_Pos * 2U))
+      (_OUT << (RST_Pos * 2U))
+    | (_OUT << (CS_Pos * 2U))
   );
   GPIOF->OSPEEDR |= (
-      (_PU << (RST_Pos * 2U))
+      (_OUT << (RST_Pos * 2U))
     | (_HS << (CS_Pos * 2U))
   );
 

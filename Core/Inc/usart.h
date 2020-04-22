@@ -19,16 +19,22 @@
 #include "main.h"
 
 /* Private defines -----------------------------------------------------------*/
+/* Pins defines */
 #define TX_Pin          GPIO_PIN_9
 #define TX_Pin_Pos      GPIO_PIN_9_Pos
 #define RX_Pin          GPIO_PIN_10
 #define RX_Pin_Pos      GPIO_PIN_10_Pos
 #define USART_Port      GPIOA
 
+/* Circular buffer defines */
+#define RXBUF_LEN       64
+#define RXBUF_MASK      (RXBUF_LEN - 1)
+
+
 /* Exported functions prototypes ---------------------------------------------*/
 void USART1_Init(void);
-void USART1_RX_Handler(uint8_t *buf, uint16_t len);
-void USART1_RX_FromIT_Handler();
+void USART1_RX_Handler(void);
+uint8_t USART_RxBufferRead(uint8_t *buf, uint16_t len);
 
 #ifdef __cplusplus
 }

@@ -1,6 +1,7 @@
 {
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "files.associations": {
-        "cstdio": "c"
+        "cstdio": "c",
+        "display.h": "c"
     }
 }
